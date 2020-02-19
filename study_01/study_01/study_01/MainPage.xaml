@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:local="clr-namespace:study_01"
+            mc:Ignorable="d"
+            x:Class="study_01.MainPage">
+    <TabbedPage.Children>
+        <ContentPage Title="タブ1"
+                     Padding="20">
+            <StackLayout Padding="20"
+                         Spacing="15"
+                         BackgroundColor="White">
+                <Label BackgroundColor="Aqua"
+                       TextColor="Black"
+                       Text="My Study Apps 01_A" />
+                <Label>
+                    <Label.BackgroundColor>
+                        Aqua
+                    </Label.BackgroundColor>
+                    <Label.TextColor>
+                        Black
+                    </Label.TextColor>
+                    <Label.Text>
+                        My Study Apps 01_B
+                    </Label.Text>
+                </Label>
+                <Button x:Name="btnSample01"
+                        Text="Button_01"
+                        BackgroundColor="Blue"
+                        TextColor="Black" />
+                <Button x:Name="btnSample02"
+                        Text="Button_02"
+                        BackgroundColor="Red"
+                        TextColor="Black" />
+            </StackLayout>
+        </ContentPage>
+        <ContentPage Title="タブ2"
+                     Padding="20">
+            <Grid Padding="10,30,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="アカウント"
+                       Grid.Row="0"
+                       Grid.Column="0"/>
+                <Entry x:Name="txtAccount"
+                       Placeholder="enter Account here"
+                       Grid.Row="0"
+                       Grid.Column="1"/>
+
+                <Label Text="パスワード"
+                       Grid.Row="1"
+                       Grid.Column="0" />
+                <Entry x:Name="txtPassword"
+                       Placeholder="enter Password here"
+                       IsPassword="True"
+                       Grid.Row="1"
+                       Grid.Column="1" />
+
+                <StackLayout Orientation="Horizontal"
+                             Grid.Row="2"
+                             Grid.Column="0"
+                             Grid.ColumnSpan="2">
+                    <Button x:Name="btnAuth" 
+                            Text="認証"
+                            HorizontalOptions="CenterAndExpand"
+                            Margin="0,0,0,0"/>
+                    <Button x:Name="btnClear"
+                            Text="クリア"
+                            HorizontalOptions="CenterAndExpand"/>
+                </StackLayout>
+            </Grid>
+        </ContentPage>
+        <ContentPage Title="タブ3"
+                     Padding="20">
+            <StackLayout Padding="20"
+                         Spacing="15"
+                         BackgroundColor="White">
+                <SearchBar x:Name="Search1"
+                           Placeholder="enter Text Here..."
+                           CancelButtonColor="Red"
+                           TextColor="Black"/>
+                <Label Text="検索結果"
+                       FontSize="Small" 
+                       FontAttributes="Bold"
+                       TextColor="Black"/>
+                <Label x:Name="lblResult"
+                       TextColor="Black" />
+            </StackLayout>
+        </ContentPage>
+        
+        <ContentPage Title="タブ4"
+                     Padding="20">
+            <StackLayout Padding="20"
+                         Orientation="Vertical"
+                         BackgroundColor="White"
+                         Spacing="15">
+                <Label Text="OnPlatform Test."/>
+                
+                <!-- OnPlatformは基本的に、「コントロールのプロパティを操作」っていう目的で使うものかしらん。 -->
+                
+                <!-- OnPlatformの使い方(たぶんこれが推奨)。
+                Microsoftのサイトではこの書き方を使ってる。 
+                使えるPlatform属性の値は下記参照(Deviceクラスで定義されている)。
+                https://docs.microsoft.com/ja-jp/dotnet/api/xamarin.forms.device?view=xamarin-forms -->
+                <Label>
+                    <Label.Text>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android"
+                                Value="On Android"/>
+                            <On Platform="iOS"
+                                Value="On iOS"/>
+                            <On Platform="UWP"
+                                Value="On UWP"/>
+                        </OnPlatform>
+                    </Label.Text>
+                    <Label.TextColor>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="Android" Value="Red"/>
+                            <On Platform="iOS" Value="Blue"/>
+                            <On Platform="UWP" Value="Green"/>
+                        </OnPlatform>
+                    </Label.TextColor>
+                </Label>
+
+                <!-- OnPlatformの使い方その2。古い記述方法。参考URLは以下。
+                https://docs.microsoft.com/ja-jp/dotnet/api/xamarin.forms.onplatform-1?view=xamarin-forms
+                なので、"UWP"を指定しようとするとコケる。 -->
+                <Label>
+                    <Label.Text>
+                        <OnPlatform x:TypeArguments="x:String"
+                                    Android="On Android"
+                                    iOS="On iOS"/>
+                    </Label.Text>
+                </Label>
+
+                <!-- OnPlatformの使い方その3。
+                やってることは2同様なので、こっちも"UWP"を指定しようとするとコケる。 -->
+                <Label>
+                    <Label.Text>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.Android>
+                                On Android
+                            </OnPlatform.Android>
+                            <OnPlatform.iOS>
+                                On iOS
+                            </OnPlatform.iOS>
+                        </OnPlatform>
+                    </Label.Text>
+                </Label>
+            </StackLayout>
+        </ContentPage>
+    </TabbedPage.Children>
+</TabbedPage>
